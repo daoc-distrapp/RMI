@@ -8,12 +8,17 @@ public class Client {
 
     public static void main(String[] args) {
         try {
-        	// Obtenemos una referencia al registro en el localhost, puerto 1099
-        	Registry registry = LocateRegistry.getRegistry();
-        	
-        	// Obtenemos una referencia al registro en el equipo <nombre>, en el puerto <puerto>
-            //Registry registry = LocateRegistry.getRegistry(<nombre>, <puerto>);
-        	
+        	Registry registry;
+        	if(args.length == 0) {
+	        	// Obtenemos una referencia al registro en el localhost, puerto 1099
+        		System.out.println("Buscando registro en localhost");
+	        	registry = LocateRegistry.getRegistry();
+        	} else {
+	        	// Obtenemos una referencia a un registro remoto (puerto por defecto)
+        		System.out.println("Buscando registro en " + args[0]);
+	        	registry = LocateRegistry.getRegistry(args[0]);        		
+        	}
+
         	// Buscamos el servidor en el registro por clave (nombre con que se registro)
             Hello stub = (Hello) registry.lookup("HolaChao");
             

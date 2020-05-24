@@ -10,7 +10,7 @@ public class Server implements Hello {
 
     @Override
     public String digaHola(String nombre) {
-    	System.out.println("Petición recibida");
+    	System.out.println("Petición a hola recibida");
         return "Hola " + nombre + " !!!";
     }
 
@@ -28,12 +28,9 @@ public class Server implements Hello {
 
             //Obtiene una referencia a un registro activo en el puerto por defecto (1099)
             Registry registry = LocateRegistry.getRegistry();
-            
-            //Crea un nuevo registro local a este programa, en el puerto indicado
-            //Registry registry = LocateRegistry.createRegistry(1099);
-            
+
             //Registra el proxy (stub) del servidor (clase Server) en el registro, con una clave o nombre
-            registry.rebind("HolaChao", stub); //o registry.bind("HolaChao", stub);
+            registry.rebind("HolaChao", stub);
 
             System.out.println("Servidor listo !!!");
         } catch (Exception e) {
